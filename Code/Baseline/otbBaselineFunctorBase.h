@@ -20,14 +20,15 @@
 #define __otbBaselineFunctorBase_h
 
 #include "itkObject.h"
+#include "itkObjectFactory.h"
 #include "itkLightObject.h"
 #include "itkObjectFactory.h"
 #include <vnl/vnl_vector.h>
 
 namespace otb
 {
-
-namespace Functor {
+namespace Functor
+{
 
 class ITK_EXPORT BaselineFunctorBase : public itk::Object
 {
@@ -54,12 +55,7 @@ protected:
   BaselineFunctorBase() {};
   ~BaselineFunctorBase() {};
 
-  void PrintSelf(std::ostream& os, itk::Indent indent) const
-  {
-	Superclass::PrintSelf(os,indent);
-	os << indent << " RTNBaseline vector : " << m_RTNBaseline << std::endl;
-  }
-
+  void PrintSelf(std::ostream& os, itk::Indent indent) const;
 
 private:
   BaselineFunctorBase(const Self&); //purposely not implemented
@@ -67,7 +63,7 @@ private:
 
   VectorType m_RTNBaseline;
 };
-	
+
 } // end namespace functor
 
 } // end namespace otb
