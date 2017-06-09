@@ -32,6 +32,7 @@
 #include "itkTranslationTransform.h"
 #include "itkMeanSquaresImageToImageMetric.h"
 #include "itkLinearInterpolateImageFunction.h"
+#include "itkDefaultConvertPixelTraitsComplex.h"
 #include "itkResampleImageFilter.h"
 
 // #include "itkRegularStepGradientDescentOptimizer.h"

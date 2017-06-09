@@ -1,6 +1,17 @@
 #include "itkDefaultConvertPixelTraits.h"
 #include <complex>
 
+
+template <typename T> bool operator<(std::complex<T> const & a, std::complex<T> const & b)
+{
+  return abs(a)<abs(b);
+}
+
+template <typename T> bool operator>(std::complex<T> const & a, std::complex<T> const & b)
+{
+  return abs(a)>abs(b);
+}
+
 namespace itk
 {
 #define ITK_DEFAULTCONVERTTRAITS_NATIVE_SPECIAL(type)                      \
