@@ -102,4 +102,4 @@ otbDiracNormalizeZeroFrequencyCalculatorTest.cxx
 
 
 ADD_EXECUTABLE(otbInterpolationTests ${INTERPOLATION_SRCS})
-TARGET_LINK_LIBRARIES(otbInterpolationTests OTBTesting OTBIO OTBCommon  ITKCommon Interpolation)
+TARGET_LINK_LIBRARIES(otbInterpolationTests OTBTesting OTBImageIO OTBCommon  ITKCommon Interpolation)

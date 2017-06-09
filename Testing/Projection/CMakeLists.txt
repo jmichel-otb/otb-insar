@@ -40,4 +40,4 @@ otbMultivariateRationalTransform.cxx
 
 
 ADD_EXECUTABLE(otbProjectionTests ${BASELINE_SRCS})
-TARGET_LINK_LIBRARIES(otbProjectionTests OTBTesting OTBIO OTBCommon  ITKCommon Projection)
+TARGET_LINK_LIBRARIES(otbProjectionTests OTBTesting OTBImageIO OTBCommon  ITKCommon Projection)

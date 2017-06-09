@@ -90,4 +90,4 @@ otbBaselineCalculatorTest.cxx
 
 
 ADD_EXECUTABLE(otbBaselineTests ${BASELINE_SRCS})
-TARGET_LINK_LIBRARIES(otbBaselineTests OTBTesting OTBIO OTBCommon  ITKCommon Baseline)
+TARGET_LINK_LIBRARIES(otbBaselineTests OTBTesting OTBImageIO OTBCommon  ITKCommon Baseline)

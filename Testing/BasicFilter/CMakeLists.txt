@@ -27,4 +27,4 @@ otbModuloImageFilterTest.cxx
 
 
 ADD_EXECUTABLE(otbBasicFilterTests ${BASICFILTER_SRCS})
-TARGET_LINK_LIBRARIES(otbBasicFilterTests OTBTesting OTBIO OTBCommon  ITKCommon BasicFilter)
+TARGET_LINK_LIBRARIES(otbBasicFilterTests OTBTesting OTBImageIO OTBCommon  ITKCommon BasicFilter)

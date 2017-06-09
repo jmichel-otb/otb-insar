@@ -3,7 +3,7 @@
 FILE(GLOB Baseline_SRCS "*.cxx" )
 
 ADD_LIBRARY(Baseline ${Baseline_SRCS})
-TARGET_LINK_LIBRARIES (Baseline OTBCommon OTBOssimAdapters)
+TARGET_LINK_LIBRARIES (Baseline OTBCommon OTBOSSIMAdapters)
 
 INSTALL(TARGETS Baseline
 RUNTIME DESTINATION ${InSAR_INSTALL_BIN_DIR} COMPONENT RuntimeLibraries

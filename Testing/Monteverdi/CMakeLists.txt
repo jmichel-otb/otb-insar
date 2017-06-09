@@ -31,5 +31,5 @@ otbDynamicFringeViewerModuleTest.cxx
 
 
 ADD_EXECUTABLE(otbInSARModulesTests1 otbInSARModulesTests1.cxx ${InSARModules_SRCS1})
-TARGET_LINK_LIBRARIES(otbInSARModulesTests1 ${LIST_MODULE_LIBRARIES} OTBIO OTBCommon OTBTesting otbMonteverdiCommon otbDynamicFringeViewerModule)
+TARGET_LINK_LIBRARIES(otbInSARModulesTests1 ${LIST_MODULE_LIBRARIES} OTBImageIO OTBCommon OTBTesting otbMonteverdiCommon otbDynamicFringeViewerModule)
 
