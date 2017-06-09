@@ -14,7 +14,7 @@
 #include "itkScaleTransform.h"
 #include "otbStreamingResampleImageFilter.h"
 
-#include "itkFFTComplexToComplexImageFilter.h"
+#include "itkComplexToComplexFFTImageFilter.h"
 
 #include "itkFFTShiftImageFilter.h"
 #include "itkConstantPadImageFilter.h"
@@ -109,8 +109,7 @@ public:
   typedef typename otb::StreamingResampleImageFilter< 
 									TInputImage, TInputImage >    ResampleFilterType;
 
-  typedef typename itk::FFTComplexToComplexImageFilter< typename
-	  PixelType::value_type, TInputImage::ImageDimension >		  FFTType;
+  typedef typename itk::ComplexToComplexFFTImageFilter< TInputImage >		  FFTType;
   typedef typename FFTType::OutputImageType                       FFTOutputImageType;
   typedef typename itk::ConstantPadImageFilter< TInputImage, 
 													TInputImage > PadFilterType;

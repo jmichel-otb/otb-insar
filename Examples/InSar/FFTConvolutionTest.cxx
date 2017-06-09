@@ -3,7 +3,7 @@
 #include "otbImageFileWriter.h"
 #include "otbImageFileWriter.h"
 
-#include "itkFFTComplexToComplexImageFilter.h"
+#include "itkComplexToComplexFFTImageFilter.h"
 #include "itkFFTShiftImageFilter.h"
 #include "itkConstantPadImageFilter.h"
 #include "itkBinaryFunctorImageFilter.h"
@@ -14,8 +14,7 @@
 typedef std::complex< double >                                         PixelType;
 typedef otb::Image< PixelType,2 >                                      ImageType;
 typedef otb::Image<double,2>                                           RealImageType;
-typedef itk::FFTComplexToComplexImageFilter< PixelType::value_type, 
-                                           ImageType::ImageDimension > FFTType;
+typedef itk::ComplexToComplexFFTImageFilter<ImageType >                FFTType;
 typedef FFTType::OutputImageType                                       FFTOutputImageType;
 typedef itk::FFTShiftImageFilter<FFTOutputImageType,FFTOutputImageType> ShiftFilterType;
 typedef itk::ConstantPadImageFilter<ImageType,ImageType>          PadFilterType;

@@ -33,8 +33,9 @@
 
 #include "itkPointSet.h"
 #include "otbGridIntersectionPointSetSource.h"
-#include "itkFFTComplexToComplexImageFilter.h"
+#include "itkComplexToComplexFFTImageFilter.h"
 
+#include "itkDefaultConvertPixelTraitsComplex.h"
 #include "otbStreamingResampleImageFilter.h"
 #include "otbStandardWriterWatcher.h"
 
@@ -52,7 +53,6 @@
 #include "otbStreamingWarpImageFilter.h"
 
 #include "itkLinearInterpolateImageFunction.h"
-#include "otbBSplinesInterpolateDeformationFieldGenerator.h"
 
 const unsigned int Dimension = 2;
 
@@ -84,8 +84,7 @@ typedef otb::ComplexInterpolateImageFunction< ImageType,FunctionType,
 typedef InterpolatorType::ContinuousIndexType            ContinuousIndexType;
 typedef otb::ImageNormalizeZeroFrequencyCalculator< ImageType >		   NormalizeZeroFrequencyType;
 
-typedef itk::FFTComplexToComplexImageFilter< PixelType::value_type, 
-                                           ImageType::ImageDimension > FFTType;
+typedef itk::ComplexToComplexFFTImageFilter< ImageType > FFTType;
 typedef FFTType::OutputImageType                                       FFTOutputImageType;
 typedef FFTType::TransformDirectionType                                FFTDirectionType;
 
@@ -107,9 +106,10 @@ typedef itk::ConstNeighborhoodIterator< ImageType >					   ImageConstNeighborhoo
 
 typedef otb::SubsampledImageRegionConstIterator< ImageType >		   SubsampledImageRegionConstIteratorType;
 //typedef otb::VectorImage<double, Dimension>							   DeformationFieldType;
-typedef itk::Vector< double, Dimension>								   DeformationOffsetPixelType;
+//typedef itk::Vector< double, Dimension>								   DeformationOffsetPixelType;
 //typedef DeformationFieldType::PixelType								   DeformationOffsetPixelType;
-typedef otb::Image< DeformationOffsetPixelType, Dimension>			   DeformationFieldType;
+typedef otb::VectorImage< double, Dimension>			   DeformationFieldType;
+typedef DeformationFieldType::PixelType  DeformationOffsetPixelType;
 typedef DeformationFieldType::RegionType							   DeformationRegionType;
 typedef itk::ImageRegionIterator< DeformationFieldType >			   DeformationImageRegionIteratorType;
 typedef otb::ImageFileWriter< DeformationFieldType >		   DeformationImageWriterType;
@@ -125,9 +125,6 @@ typedef itk::LinearInterpolateImageFunction< DeformationFieldType >    LinearInt
 typedef itk::Array<float>											   OffsetDataType;
 typedef itk::PointSet< OffsetDataType, Dimension >					   OffsetPointSetType;
 typedef OffsetPointSetType::PointType                                  OffsetPointType;
-typedef otb::BSplinesInterpolateDeformationFieldGenerator<
-							OffsetPointSetType, DeformationFieldType>  DeformationFieldGeneratorType;
-
 
 class ComplexConjugateProduct
 {
@@ -214,7 +211,7 @@ int main(int argc, char* argv[])
   transform->SetOutputKeywordList(slave->GetOutput()->GetImageKeywordlist());
   //transform->SetDEMDirectory(demdir);
 
-  transform->InstanciateTransform();
+  transform->InstantiateTransform();
   
 
   IndexType currentIndex;
@@ -593,25 +590,12 @@ int main(int argc, char* argv[])
   resampleDefField->SetOutputSize(slave->GetOutput()->GetLargestPossibleRegion().GetSize());
   resampleDefField->SetOutputOrigin(slave->GetOutput()->GetOrigin());
   resampleDefField->SetOutputSpacing(slave->GetOutput()->GetSpacing());
-/*
-  DeformationFieldGeneratorType::Pointer generate = DeformationFieldGeneratorType::New();
-  generate->SetPointSet(offsetPointSet);
-  generate->SetOutputOrigin(master->GetOutput()->GetOrigin());
-  generate->SetOutputSpacing(master->GetOutput()->GetSpacing());
-  generate->SetOutputSize(mstSize);
-*/
-/*
-  DeformationImageWriterType::Pointer writeDefField = DeformationImageWriterType::New();
-  writeDefField->SetInput(resampleDefField->GetOutput());
-  writeDefField->SetFileName("fineDefField.hdr");
-  writeDefField->SetNumberOfDivisionsTiledStreaming(1);
-  writeDefField->Update();
-*/
+
   WarpImageFilterType::Pointer warp = WarpImageFilterType::New();
 
   warp->SetInput(slave->GetOutput());
   //warp->SetDeformationField(deformationField);  // Not currently working if grid step is different from 1
-  warp->SetDeformationField(resampleDefField->GetOutput());
+  warp->SetDisplacementField(resampleDefField->GetOutput());
   //warp->SetDeformationField(generate->GetOutput());
   warp->SetEdgePaddingValue(0.0);
 
@@ -620,7 +604,7 @@ int main(int argc, char* argv[])
   maxDeformation[0] = estimate->GetAffineTransform()->GetTranslation()[0] - 10.0; // The minus is offset related... need a if statement!
   maxDeformation[1] = estimate->GetAffineTransform()->GetTranslation()[1] - 10.0; // The minus is offset related... same as above!
 
-  warp->SetMaximumDeformation(maxDeformation);
+  warp->SetMaximumDisplacement(maxDeformation);
   warp->SetInterpolator(interpolator);
 
   extract = ExtractFilterType::New();

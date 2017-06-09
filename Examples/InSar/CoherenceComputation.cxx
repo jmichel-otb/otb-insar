@@ -24,7 +24,7 @@
 #include "otbExtractROI.h"
 #include "itkImageRegionIteratorWithIndex.h"
 
-#include "itkFFTComplexToComplexImageFilter.h"
+#include "itkComplexToComplexFFTImageFilter.h"
 
 #include "otbStandardWriterWatcher.h"
 
@@ -49,8 +49,7 @@ typedef otb::ImageFileWriter< ImageType >                     WriterType;
 
 typedef otb::ExtractROI< PixelType, PixelType >                        ExtractFilterType;
 
-typedef itk::FFTComplexToComplexImageFilter< PixelType::value_type, 
-                                           ImageType::ImageDimension > FFTType;
+typedef itk::ComplexToComplexFFTImageFilter< ImageType > FFTType;
 typedef FFTType::OutputImageType                                       FFTOutputImageType;
 
 typedef itk::FFTShiftImageFilter<FFTOutputImageType,FFTOutputImageType> ShiftFilterType;

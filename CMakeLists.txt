@@ -65,27 +65,6 @@ INCLUDE_DIRECTORIES (
   ${FFTW3_INCLUDE_DIRS}
 )
 
-# Generate Monteverdi modules
-OPTION(GENERATE_MONTEVERDI_APPLICATION "Generate the Monteverdi application." OFF)
-
-IF(GENERATE_MONTEVERDI_APPLICATION)
-  #Find Monteverdi and load its settings.
-  FIND_PACKAGE(Monteverdi)
-  IF(Monteverdi_FOUND)
-    MESSAGE("Monteverdi use file: ${Monteverdi_USE_FILE}")
-    INCLUDE(${Monteverdi_USE_FILE})
-    INCLUDE_DIRECTORIES(${InSAR_SOURCE_DIR}/Monteverdi/Modules/DynamicFringeViewer/
-	                    ${InSAR_SOURCE_DIR}/Monteverdi/Common/    
-                        ${InSAR_BINARY_DIR}/Monteverdi/Modules/DynamicFringeViewer/
-                        )
-    SUBDIRS(Monteverdi)
-
-  ELSE(Monteverdi_FOUND)
-    MESSAGE("Monteverdi not found.  Please set Monteverdi_DIR")
-  ENDIF(Monteverdi_FOUND)
-ENDIF(GENERATE_MONTEVERDI_APPLICATION)
-
-
 SET(InSAR_DATA ${InSAR_SOURCE_DIR}/Data)
 SET(BASELINE_FILES ${InSAR_DATA}/Baseline)
 SET(INPUTDATA ${InSAR_DATA}/Input)

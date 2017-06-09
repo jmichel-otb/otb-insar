@@ -21,7 +21,6 @@ FlatEarthRemovalImageFilter<TInputImage, TOutputImage>
 ::FlatEarthRemovalImageFilter()
  {
   this->SetNumberOfRequiredInputs( 1 );
-  this->SetNumberOfOutputs(1);
 
   // Default sizes
   m_PatchSizePerDim = 8;

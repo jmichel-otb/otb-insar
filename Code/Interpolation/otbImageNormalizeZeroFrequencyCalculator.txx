@@ -21,7 +21,7 @@
 #include "otbImageNormalizeZeroFrequencyCalculator.h"
 
 #include "itkImageRegionConstIteratorWithIndex.h"
-#include "itkFFTComplexToComplexImageFilter.h"
+#include "itkComplexToComplexFFTImageFilter.h"
 #include "itkComplexToModulusImageFilter.h"
 #include "itkMinimumMaximumImageCalculator.h"
 #include "itkBinaryThresholdImageFilter.h"
@@ -92,7 +92,7 @@ Compute()
     return;
     }
 
-  typedef itk::FFTComplexToComplexImageFilter<ValueType,ImageDimension> FFTImageType;
+  typedef itk::ComplexToComplexFFTImageFilter<TImage> FFTImageType;
 
   typedef itk::Image<typename FFTImageType::OutputImagePixelType,ImageDimension> FFTOutputImageType;
   typedef itk::ComplexToModulusImageFilter<FFTOutputImageType,ScalarImageType>   ComplexToModulusImageType;
@@ -104,7 +104,7 @@ Compute()
 
   fftImage->SetInput(m_Image.GetPointer());
 
-  fftImage->SetTransformDirection(FFTImageType::DIRECT);
+  fftImage->SetTransformDirection(FFTImageType::FORWARD);
   typename FFTOutputImageType::SpacingType spacingFFT;
 
   fftImage->GetOutput()->UpdateOutputInformation();
@@ -143,7 +143,7 @@ Compute()
   averageIndex.Fill(0);
   double nbIndex =0.0;
 
-  it.Begin();
+  it.GoToBegin();
 
   while( !it.IsAtEnd() )
     {

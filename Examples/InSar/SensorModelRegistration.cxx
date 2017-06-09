@@ -19,6 +19,7 @@
 #include "otbImage.h"
 #include "otbImageFileReader.h"
 #include "otbImageFileWriter.h"
+#include "itkDefaultConvertPixelTraitsComplex.h"
 #include "otbGenericRSResampleImageFilter.h"
 #include "otbComplexInterpolateImageFunction.h"
 #include "otbWindowedSincInterpolateImageBlackmanFunction.h"
@@ -84,7 +85,7 @@ int main(int argc, char * argv[])
   resampler->SetOutputOrigin(extract->GetOutput()->GetOrigin());
   resampler->SetOutputSpacing(extract->GetOutput()->GetSpacing());
   resampler->SetOutputSize(extract->GetOutput()->GetLargestPossibleRegion().GetSize());
-  resampler->SetDEMDirectory(demdir);
+  otb::DEMHandler::Instance()->OpenDEMDirectory( demdir );
 
   // Set-up interpolator
   InterpolatorType::Pointer interpolator = InterpolatorType::New();

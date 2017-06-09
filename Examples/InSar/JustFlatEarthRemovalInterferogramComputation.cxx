@@ -29,7 +29,7 @@
 #include "itkComplexToPhaseImageFilter.h"
 #include "otbComplexToIntensityImageFilter.h"
 #include "itkAccumulateImageFilter.h"
-#include "itkFFTComplexToComplexImageFilter.h"
+#include "itkComplexToComplexFFTImageFilter.h"
 #include "itkMinimumMaximumImageCalculator.h"
 #include "otbFlatEarthRemovalFunctor.h"
 #include "otbUnaryFunctorWithIndexImageFilter.h"
@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
   typedef ImageType::IndexType    IndexType;
   typedef double                  ScalarPixelType;
   typedef otb::Image<ScalarPixelType,2>                      ScalarImageType;
-  typedef itk::FFTComplexToComplexImageFilter< ScalarPixelType, ImageType::ImageDimension >  FFTType;
+  typedef itk::ComplexToComplexFFTImageFilter< ImageType >  FFTType;
   typedef FFTType::TransformDirectionType                                FFTDirectionType;
 
   typedef itk::ComplexToModulusImageFilter<FFTType::OutputImageType,ScalarImageType>      ModulusFilterType;
