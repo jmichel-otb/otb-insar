@@ -19,7 +19,7 @@
 
 #include "otbImage.h"
 #include "otbImageFileReader.h"
-#include "otbStreamingImageFileWriter.h"
+#include "otbImageFileWriter.h"
 #include "otbImageFileWriter.h"
 
 #include "otbFlatEarthRemovalImageFilter.h"
@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
   flatEarthRemove->SetPatchSizePerDim(atoi(argv[3]));
   flatEarthRemove->SetPadSizePerDim(atoi(argv[4]));
 
-  typedef otb::StreamingImageFileWriter<OutImageType> WriterType;
+  typedef otb::ImageFileWriter<OutImageType> WriterType;
   WriterType::Pointer flatEarthRemoveWriter = WriterType::New();
   flatEarthRemoveWriter->SetFileName(argv[2]);
   flatEarthRemoveWriter->SetInput(flatEarthRemove->GetOutput());

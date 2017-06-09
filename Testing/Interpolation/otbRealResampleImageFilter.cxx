@@ -24,7 +24,7 @@
 #include "otbImageFileReader.h"
 #include "otbImageFileWriter.h"
 #include "itkResampleImageFilter.h"
-#include "otbStreamingImageFileWriter.h"
+#include "otbImageFileWriter.h"
 #include <fstream>
 
 #include "otbWindowedSincInterpolateImageBlackmanFunction.h"

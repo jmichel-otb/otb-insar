@@ -20,7 +20,7 @@
 
 #include "otbImage.h"
 #include "otbImageFileReader.h"
-#include "otbStreamingImageFileWriter.h"
+#include "otbImageFileWriter.h"
 #include "otbImageFileWriter.h"
 #include "itkTernaryFunctorImageFilter.h"
 
@@ -120,7 +120,7 @@ int main(int argc, char* argv[])
 
   /* Reading master and slave images */
   typedef otb::ImageFileReader<ImageType> ReaderType;
-  typedef otb::StreamingImageFileWriter<ImageType> WriterType;
+  typedef otb::ImageFileWriter<ImageType> WriterType;
 
   typedef itk::ComplexToModulusImageFilter<ImageType,ScalarImageType> ModulusFilterType;
   typedef itk::Statistics::ScalarImageToHistogramGenerator<ScalarImageType> HistogramGeneratorType;
@@ -173,7 +173,7 @@ int main(int argc, char* argv[])
   colormapper->SetInput2(coherenceFilter->GetOutput());
   colormapper->SetInput3(phaseFilter->GetOutput());
 
-  typedef otb::StreamingImageFileWriter<RGBImageType> WriterRGBType;
+  typedef otb::ImageFileWriter<RGBImageType> WriterRGBType;
   WriterRGBType::Pointer writerRGB = WriterRGBType::New();
   writerRGB->SetFileName(argv[4]);
   writerRGB->SetInput(colormapper->GetOutput());

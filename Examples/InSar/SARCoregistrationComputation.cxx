@@ -19,7 +19,7 @@
 
 #include "otbImage.h"
 #include "otbImageFileReader.h"
-#include "otbStreamingImageFileWriter.h"
+#include "otbImageFileWriter.h"
 #include "otbImageFileWriter.h"
 #include "otbStreamingResampleImageFilter.h"
 
@@ -273,7 +273,7 @@ int main(int argc, char* argv[])
   typedef otb::Image<PixelType,2> ImageType;
 
   typedef otb::ImageFileReader<ImageType> ReaderType;
-  typedef otb::StreamingImageFileWriter<ImageType> WriterType;
+  typedef otb::ImageFileWriter<ImageType> WriterType;
 
   ReaderType::Pointer master = ReaderType::New();
   ReaderType::Pointer slave = ReaderType::New();

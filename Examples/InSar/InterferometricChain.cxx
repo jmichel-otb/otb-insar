@@ -19,7 +19,7 @@
 
 #include "otbImage.h"
 #include "otbImageFileReader.h"
-#include "otbStreamingImageFileWriter.h"
+#include "otbImageFileWriter.h"
 #include "otbImageFileWriter.h"
 #include "otbExtractROI.h"
 #include "itkImageRegionIteratorWithIndex.h"
@@ -123,7 +123,7 @@ int main(int argc, char* argv[])
 	//coregistration->SetCoherencyThreshold(coherency_threshold);
 	//coregistration->SetCoherencyWindowSizePerDim(windowSizePerDim);
   
-	typedef otb::StreamingImageFileWriter< ImageType > WriterType;
+	typedef otb::ImageFileWriter< ImageType > WriterType;
 
 	WriterType::Pointer writer = WriterType::New();
 	writer->SetFileName(outfname1);

@@ -1,6 +1,6 @@
 #include "otbImage.h"
 #include "otbImageFileReader.h"
-#include "otbStreamingImageFileWriter.h"
+#include "otbImageFileWriter.h"
 #include "otbImageFileWriter.h"
 
 #include "itkFFTComplexToComplexImageFilter.h"
@@ -22,8 +22,8 @@ typedef itk::ConstantPadImageFilter<ImageType,ImageType>          PadFilterType;
 typedef FFTType::TransformDirectionType                                FFTDirectionType;
 typedef otb::ImageFileReader< ImageType >                              ReaderType;
 typedef otb::ImageFileWriter<FFTOutputImageType>                       FFTWriterType;
-typedef otb::StreamingImageFileWriter< ImageType >                     WriterType
-;typedef otb::StreamingImageFileWriter< RealImageType >                RealWriterType;
+typedef otb::ImageFileWriter< ImageType >                     WriterType
+;typedef otb::ImageFileWriter< RealImageType >                RealWriterType;
 typedef itk::ComplexToModulusImageFilter<FFTOutputImageType,RealImageType>      ModulusFilterType;
 typedef itk::MinimumMaximumImageCalculator<RealImageType>              MinMaxCalculatorType;
 typedef itk::DivideImageFilter<FFTOutputImageType,RealImageType,FFTOutputImageType> DivideFilterType;

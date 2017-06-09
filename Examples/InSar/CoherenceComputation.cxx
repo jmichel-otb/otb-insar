@@ -19,7 +19,7 @@
 
 #include "otbImage.h"
 #include "otbImageFileReader.h"
-#include "otbStreamingImageFileWriter.h"
+#include "otbImageFileWriter.h"
 #include "otbImageFileWriter.h"
 #include "otbExtractROI.h"
 #include "itkImageRegionIteratorWithIndex.h"
@@ -45,7 +45,7 @@ typedef ImageType::RegionType                                          RegionTyp
 typedef ImageType::SpacingType										   SpacingType;
 
 typedef otb::ImageFileReader< ImageType >                              ReaderType;
-typedef otb::StreamingImageFileWriter< ImageType >                     WriterType;
+typedef otb::ImageFileWriter< ImageType >                     WriterType;
 
 typedef otb::ExtractROI< PixelType, PixelType >                        ExtractFilterType;
 
@@ -227,7 +227,7 @@ int main(int argc, char* argv[])
   extract->SetExtractionRegion(region);
   extract->SetInput(master->GetOutput());
 
-  typedef otb::StreamingImageFileWriter< ImageType > WriterFixedType;
+  typedef otb::ImageFileWriter< ImageType > WriterFixedType;
   WriterFixedType::Pointer writer = WriterFixedType::New();
   writer->SetFileName(outfname1);
   writer->SetInput(extract->GetOutput());

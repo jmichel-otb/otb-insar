@@ -19,7 +19,7 @@
 
 #include "otbImage.h"
 #include "otbImageFileReader.h"
-#include "otbStreamingImageFileWriter.h"
+#include "otbImageFileWriter.h"
 #include "otbImageFileWriter.h"
 #include "itkUnaryFunctorImageFilter.h"
 
@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
 
   /* Reading master and slave images */
   typedef otb::ImageFileReader<ImageType> ReaderType;
-  typedef otb::StreamingImageFileWriter<ImageType> WriterType;
+  typedef otb::ImageFileWriter<ImageType> WriterType;
 
   ReaderType::Pointer master = ReaderType::New();
   ReaderType::Pointer slave = ReaderType::New();
@@ -146,7 +146,7 @@ int main(int argc, char* argv[])
   colormapper->SetInput3(phaseFilter->GetOutput());
   //       colormapper->SetNumberOfThreads(1);
 
-  typedef otb::StreamingImageFileWriter<RGBImageType> WriterRGBType;
+  typedef otb::ImageFileWriter<RGBImageType> WriterRGBType;
   WriterRGBType::Pointer writerRGB = WriterRGBType::New();
   writerRGB->SetFileName(argv[5]);
   writerRGB->SetInput(colormapper->GetOutput());

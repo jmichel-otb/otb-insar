@@ -18,7 +18,7 @@
 =========================================================================*/
 #include "otbImage.h"
 #include "otbImageFileReader.h"
-#include "otbStreamingImageFileWriter.h"
+#include "otbImageFileWriter.h"
 #include "otbGenericRSResampleImageFilter.h"
 #include "otbComplexInterpolateImageFunction.h"
 #include "otbWindowedSincInterpolateImageBlackmanFunction.h"
@@ -29,7 +29,7 @@
 typedef std::complex<double> PixelType;
 typedef otb::Image<PixelType> ImageType;
 typedef otb::ImageFileReader<ImageType> ReaderType;
-typedef otb::StreamingImageFileWriter<ImageType> WriterType;
+typedef otb::ImageFileWriter<ImageType> WriterType;
 typedef otb::GenericRSResampleImageFilter<ImageType,ImageType> ResampleFilterType;
 typedef otb::Function::BlackmanWindowFunction<double> FunctionType;
 typedef itk::ConstantBoundaryCondition<ImageType> BoundaryConditionType;

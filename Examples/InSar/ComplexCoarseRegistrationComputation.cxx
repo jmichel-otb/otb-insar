@@ -19,7 +19,7 @@
 
 #include "otbImage.h"
 #include "otbImageFileReader.h"
-#include "otbStreamingImageFileWriter.h"
+#include "otbImageFileWriter.h"
 #include "otbImageFileWriter.h"
 #include "otbExtractROI.h"
 #include "itkImageRegionIteratorWithIndex.h"
@@ -69,7 +69,7 @@ typedef PointSetType::PointsContainer                                  PointsCon
 typedef PointSetType::PointType                                        PointType;
 
 typedef otb::ImageFileReader< ImageType >                              ReaderType;
-typedef otb::StreamingImageFileWriter< ImageType >                     WriterType;
+typedef otb::ImageFileWriter< ImageType >                     WriterType;
 
 typedef otb::GenericRSTransform<  >                                    TransformType; // Default is Double, 2 dimensions
 typedef otb::ExtractROI< PixelType, PixelType >                        ExtractFilterType;
@@ -112,7 +112,7 @@ typedef itk::Vector< double, Dimension>								   DeformationOffsetPixelType;
 typedef otb::Image< DeformationOffsetPixelType, Dimension>			   DeformationFieldType;
 typedef DeformationFieldType::RegionType							   DeformationRegionType;
 typedef itk::ImageRegionIterator< DeformationFieldType >			   DeformationImageRegionIteratorType;
-typedef otb::StreamingImageFileWriter< DeformationFieldType >		   DeformationImageWriterType;
+typedef otb::ImageFileWriter< DeformationFieldType >		   DeformationImageWriterType;
 
 typedef EstimateFilterType::AffineTransformType						   AffineTransformType;
 typedef otb::StreamingWarpImageFilter< ImageType, ImageType, 
@@ -359,7 +359,7 @@ int main(int argc, char* argv[])
   resample->SetOutputOrigin(master->GetOutput()->GetOrigin());
   resample->SetOutputSpacing(master->GetOutput()->GetSpacing());
 
-  typedef otb::StreamingImageFileWriter< ImageType > WriterFixedType;
+  typedef otb::ImageFileWriter< ImageType > WriterFixedType;
   WriterFixedType::Pointer writer = WriterFixedType::New();
   writer->SetFileName(outfname1);
   writer->SetInput(extract->GetOutput());

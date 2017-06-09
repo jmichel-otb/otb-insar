@@ -19,7 +19,7 @@
 
 #include "otbImage.h"
 #include "otbImageFileReader.h"
-#include "otbStreamingImageFileWriter.h"
+#include "otbImageFileWriter.h"
 #include "otbImageFileWriter.h"
 #include "otbForwardSensorModel.h"
 #include "otbInverseSensorModel.h"
@@ -218,7 +218,7 @@ int main(int argc, char* argv[])
 
   /* Reading master and slave images */
   typedef otb::ImageFileReader<ImageType> ReaderType;
-  typedef otb::StreamingImageFileWriter<ImageType> WriterType;
+  typedef otb::ImageFileWriter<ImageType> WriterType;
 
   ReaderType::Pointer master = ReaderType::New();
   ReaderType::Pointer slave = ReaderType::New();
@@ -297,7 +297,7 @@ int main(int argc, char* argv[])
   slaveFilter->SetInput(slaveAorI->GetOutput());
 
   //Optionally output images
-  typedef otb::StreamingImageFileWriter<ScalarImageType> ScalarWriterType;
+  typedef otb::ImageFileWriter<ScalarImageType> ScalarWriterType;
 
   ScalarWriterType::Pointer masterWriter = ScalarWriterType:: New();
   masterWriter->SetFileName("master-filtered.tif");
@@ -471,7 +471,7 @@ int main(int argc, char* argv[])
   colormapper->SetInput3(phaseFilter->GetOutput());
   //       colormapper->SetNumberOfThreads(1);
 
-  typedef otb::StreamingImageFileWriter<RGBImageType> WriterRGBType;
+  typedef otb::ImageFileWriter<RGBImageType> WriterRGBType;
   WriterRGBType::Pointer writerRGB = WriterRGBType::New();
   writerRGB->SetFileName(argv[4]);
   writerRGB->SetInput(colormapper->GetOutput());
